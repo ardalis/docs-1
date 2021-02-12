@@ -1,8 +1,8 @@
 ---
 title: "How to serialize and deserialize JSON using C# - .NET"
 description: "Learn how to use the System.Text.Json namespace to serialize to and deserialize from JSON in .NET. Includes sample code."
-ms.date: 11/30/2020
-ms.custom: contperfq2
+ms.date: 01/12/2021
+ms.custom: contperf-fy21q2
 no-loc: [System.Text.Json, Newtonsoft.Json]
 zone_pivot_groups: dotnet-version
 helpviewer_keywords:
@@ -18,11 +18,19 @@ This article shows how to use the <xref:System.Text.Json?displayProperty=fullNam
 
 The directions and sample code use the library directly, not through a framework such as [ASP.NET Core](/aspnet/core/).
 
-Most of the serialization sample code sets <xref:System.Text.Json.JsonSerializerOptions.WriteIndented?displayProperty=nameWithType> to `true` to "pretty-print" the JSON (with indentation and whitespace for human readability). For production use, you would typically accept the default value of `false` for this setting.
+Most of the serialization sample code sets <xref:System.Text.Json.JsonSerializerOptions.WriteIndented?displayProperty=nameWithType> to `true` to "pretty-print" the JSON (with indentation and whitespace for human readability). For production use, you would typically accept the default value of `false` for this setting, since adding unnecessary whitespace may incur a noticeable, negative impact on performance and bandwidth usage.
 
 The code examples refer to the following class and variants of it:
 
 :::code language="csharp" source="snippets/system-text-json-how-to/csharp/WeatherForecast.cs" id="WF":::
+
+> [!NOTE]
+> Parts of System.Text.Json use [ref structs](../../csharp/language-reference/builtin-types/struct.md#ref-struct), which are not supported by Visual Basic. If you try to use System.Text.Json ref struct APIs with Visual Basic you get BC40000 compiler errors. The error message indicates that the problem is an obsolete API, but the actual issue is lack of ref struct support in the compiler. The following parts of System.Text.Json aren't usable from Visual Basic:
+>
+> * The <xref:System.Text.Json.Utf8JsonReader> class.
+> * Overloads of other APIs that include a <xref:System.Memory%601.Span> type. Most methods include overloads that use `String` instead of `Span`.
+>
+> These restrictions are in place because ref structs cannot be used safely without language support, even when just "passing data through." Subverting this error will result in Visual Basic code that can corrupt memory and should not be done.
 
 ## Namespaces
 
@@ -182,6 +190,15 @@ To deserialize from a file by using asynchronous code, call the <xref:System.Tex
 
 :::code language="csharp" source="snippets/system-text-json-how-to/csharp/RoundtripToFileAsync.cs" id="Deserialize":::
 
+> [!TIP]
+> If you have JSON that you want to deserialize, and you don't have the class to deserialize it into, Visual Studio 2019 can automatically generate the class you need:
+>
+> 1. Copy the JSON that you need to deserialize.
+> 1. Create a class file and delete the template code.
+> 1. Choose **Edit** > **Paste Special** > **Paste JSON as Classes**.
+>
+> The result is a class that you can use for your deserialization target.
+
 ## Deserialize from UTF-8
 
 To deserialize from UTF-8, call a <xref:System.Text.Json.JsonSerializer.Deserialize%2A?displayProperty=nameWithType> overload that takes a `ReadOnlySpan<byte>` or a `Utf8JsonReader`, as shown in the following examples. The examples assume the JSON is in a byte array named jsonUtf8Bytes.
@@ -242,6 +259,8 @@ Here's an example type to be serialized and pretty-printed JSON output:
 }
 ```
 
+If you use `JsonSerializerOptions` repeatedly with the same options, don't create a new `JsonSerializerOptions` instance each time you use it. Reuse the same instance for every call. For more information, see [Reuse JsonSerializerOptions instances](system-text-json-configure-options.md#reuse-jsonserializeroptions-instances).
+
 ## Include fields
 
 ::: zone pivot="dotnet-5-0"
@@ -276,8 +295,20 @@ Extension methods on `HttpClient` and `HttpContent` are not available in System.
 ## See also
 
 * [System.Text.Json overview](system-text-json-overview.md)
-* [How to write custom converters](system-text-json-converters-how-to.md)
-* [How to migrate from Newtonsoft.Json](system-text-json-migrate-from-newtonsoft-how-to.md)
-* [DateTime and DateTimeOffset support in System.Text.Json](../datetime/system-text-json-support.md)
+* [Instantiate JsonSerializerOptions instances](system-text-json-configure-options.md)
+* [Enable case-insensitive matching](system-text-json-character-casing.md)
+* [Customize property names and values](system-text-json-customize-properties.md)
+* [Ignore properties](system-text-json-ignore-properties.md)
+* [Allow invalid JSON](system-text-json-invalid-json.md)
+* [Handle overflow JSON](system-text-json-handle-overflow.md)
+* [Preserve references](system-text-json-preserve-references.md)
+* [Immutable types and non-public accessors](system-text-json-immutability.md)
+* [Polymorphic serialization](system-text-json-polymorphism.md)
+* [Migrate from Newtonsoft.Json to System.Text.Json](system-text-json-migrate-from-newtonsoft-how-to.md)
+* [Customize character encoding](system-text-json-character-encoding.md)
+* [Write custom serializers and deserializers](write-custom-serializer-deserializer.md)
+* [Write custom converters for JSON serialization](system-text-json-converters-how-to.md)
+* [DateTime and DateTimeOffset support](../datetime/system-text-json-support.md)
+* [Supported collection types in System.Text.Json](system-text-json-supported-collection-types.md)
 * [System.Text.Json API reference](xref:System.Text.Json)
-<!-- * [System.Text.Json roadmap](https://github.com/dotnet/runtime/blob/81bf79fd9aa75305e55abe2f7e9ef3f60624a3a1/src/libraries/System.Text.Json/roadmap/README.md)-->
+* [System.Text.Json.Serialization API reference](xref:System.Text.Json.Serialization)

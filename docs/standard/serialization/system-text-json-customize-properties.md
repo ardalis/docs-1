@@ -1,7 +1,7 @@
 ---
 title: How to customize property names and values with System.Text.Json
 description: "Learn how to customize property names and values when serializing with System.Text.Json in .NET."
-ms.date: 11/30/2020
+ms.date: 02/01/2021
 no-loc: [System.Text.Json, Newtonsoft.Json]
 helpviewer_keywords:
   - "JSON serialization"
@@ -15,7 +15,7 @@ helpviewer_keywords:
 By default, property names and dictionary keys are unchanged in the JSON output, including case. Enum values are represented as numbers. In this article, you'll learn how to:
 
 > [!NOTE]
-> The [web defaults](system-text-json-configure-options.md#web-defaults-for-jsonserializeroptions) is camel case.
+> The [web default](system-text-json-configure-options.md#web-defaults-for-jsonserializeroptions) is camel case.
 
 * [Customize individual property names](#customize-individual-property-names)
 * [Convert all property names to camel case](#use-camel-case-for-all-json-property-names)
@@ -46,6 +46,7 @@ The property name set by this attribute:
 
 * Applies in both directions, for serialization and deserialization.
 * Takes precedence over property naming policies.
+* [Doesn't affect parameter name matching for parameterized constructors](system-text-json-immutability.md#immutable-types-and-records).
 
 ## Use camel case for all JSON property names
 
@@ -160,12 +161,19 @@ Enum string names can be deserialized as well, as shown in the following example
 ## See also
 
 * [System.Text.Json overview](system-text-json-overview.md)
-* [Instantiate JsonSerializerOptions](system-text-json-configure-options.md)
+* [How to serialize and deserialize JSON](system-text-json-how-to.md)
+* [Instantiate JsonSerializerOptions instances](system-text-json-configure-options.md)
 * [Enable case-insensitive matching](system-text-json-character-casing.md)
 * [Ignore properties](system-text-json-ignore-properties.md)
 * [Allow invalid JSON](system-text-json-invalid-json.md)
 * [Handle overflow JSON](system-text-json-handle-overflow.md)
-* [Preserve circular references](system-text-json-preserve-references.md)
+* [Preserve references](system-text-json-preserve-references.md)
 * [Immutable types and non-public accessors](system-text-json-immutability.md)
 * [Polymorphic serialization](system-text-json-polymorphism.md)
+* [Migrate from Newtonsoft.Json to System.Text.Json](system-text-json-migrate-from-newtonsoft-how-to.md)
+* [Customize character encoding](system-text-json-character-encoding.md)
+* [Write custom serializers and deserializers](write-custom-serializer-deserializer.md)
+* [Write custom converters for JSON serialization](system-text-json-converters-how-to.md)
+* [DateTime and DateTimeOffset support](../datetime/system-text-json-support.md)
 * [System.Text.Json API reference](xref:System.Text.Json)
+* [System.Text.Json.Serialization API reference](xref:System.Text.Json.Serialization)

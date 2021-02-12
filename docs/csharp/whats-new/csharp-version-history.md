@@ -65,7 +65,7 @@ Other C# 2.0 features added capabilities to existing features:
 
 While C# may have started as a generic Object-Oriented (OO) language, C# version 2.0 changed that in a hurry. Once they had their feet under them, they went after some serious developer pain points. And they went after them in a significant way.
 
-With generics, types and methods can operate on an arbitrary type while still retaining type safety. For instance, having a <xref:System.Collections.Generic.List%601> lets you have `List<string>` or `List<int>` and perform type-safe operations on those strings or integers while you iterate through them. Using generics is better than create `ListInt` that derives from `ArrayList`  or casting from `Object` for every operation.
+With generics, types and methods can operate on an arbitrary type while still retaining type safety. For instance, having a <xref:System.Collections.Generic.List%601> lets you have `List<string>` or `List<int>` and perform type-safe operations on those strings or integers while you iterate through them. Using generics is better than creating a `ListInt` type which derives from `ArrayList`  or casting from `Object` for every operation.
 
 C# version 2.0 brought iterators. To put it succinctly, iterators let you examine all the items in a `List` (or other Enumerable types) with a `foreach` loop. Having iterators as a first-class part of the language dramatically enhanced readability of the language and people's ability to reason about the code.
 
@@ -129,17 +129,17 @@ But `async` and `await` are the real stars of this release. When these features 
 
 With versions 3.0 and 5.0, C# had added major new features in an object-oriented language. With version 6.0, released with Visual Studio 2015, it would go away from doing a dominant killer feature and instead release many smaller features that made C# programming more productive. Here are some of them:
 
-- [Static imports](./csharp-6.md#using-static)
-- [Exception filters](./csharp-6.md#exception-filters)
-- [Auto-property initializers](./csharp-6.md#auto-property-initializers)
-- [Expression bodied members](./csharp-6.md#expression-bodied-function-members)
-- [Null propagator](./csharp-6.md#null-conditional-operators)
-- [String interpolation](./csharp-6.md#string-interpolation)
-- [nameof operator](./csharp-6.md#the-nameof-expression)
-- [Index initializers](csharp-6.md#extension-add-methods-in-collection-initializers)
+- [Static imports](../language-reference/keywords/using-static.md)
+- [Exception filters](../language-reference/keywords/when.md)
+- [Auto-property initializers](../properties.md)
+- [Expression bodied members](../language-reference/operators/lambda-operator.md#expression-body-definition)
+- [Null propagator](../language-reference/operators/member-access-operators.md#null-conditional-operators--and-)
+- [String interpolation](../language-reference/tokens/interpolated.md)
+- [nameof operator](../language-reference/operators/nameof.md)
 
 Other new features include:
 
+- Index initializers
 - Await in catch/finally blocks
 - Default values for getter-only properties
 

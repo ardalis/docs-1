@@ -12,12 +12,36 @@
     - name: Breaking changes
       href: fx-core.md
     - name: Unavailable technologies
-      href: ../porting/net-framework-tech-unavailable.md?toc=/dotnet/core/compatibility/toc.json&bc=/dotnet/breadcrumb/toc.json
+      href: ../porting/net-framework-tech-unavailable.md
     - name: APIs that always throw
       href: unsupported-apis.md
   - name: Breaking changes by version
     expanded: true
     items:
+    - name: .NET 6.0
+      items:
+      - name: Overview
+        href: 6.0.md
+      - name: ASP.NET Core
+        items:
+        - name: "Blazor: Parameter name changed in RequestImageFileAsync method"
+          href: aspnet-core/6.0/blazor-parameter-name-changed-in-method.md
+        - name: "Kestrel: Log message attributes changed"
+          href: aspnet-core/6.0/kestrel-log-message-attributes-changed.md
+        - name: "Middleware: HTTPS Redirection Middleware throws exception on ambiguous HTTPS ports"
+          href: aspnet-core/6.0/middleware-ambiguous-https-ports-exception.md
+        - name: "Razor: RazorEngine APIs marked obsolete"
+          href: aspnet-core/6.0/razor-engine-apis-obsolete.md
+      - name: Windows Forms
+        items:
+        - name: APIs throw ArgumentNullException
+          href: windows-forms/6.0/apis-throw-argumentnullexception.md
+        - name: NotifyIcon.Text maximum text length increased
+          href: windows-forms/6.0/notifyicon-text-max-text-length-increased.md
+        - name: TableLayoutSettings properties throw InvalidEnumArgumentException
+          href: windows-forms/6.0/tablelayoutsettings-apis-throw-invalidenumargumentexception.md
+        - name: TreeNodeCollection.Item throws exception if node is assigned elsewhere
+          href: windows-forms/6.0/treenodecollection-item-throws-argumentexception.md
     - name: .NET 5.0
       items:
       - name: Overview
@@ -34,6 +58,8 @@
           href: aspnet-core/5.0/authorization-resource-in-endpoint-routing.md
         - name: Microsoft-prefixed Azure integration packages removed
           href: aspnet-core/5.0/azure-integration-packages-removed.md
+        - name: "Blazor: Route precedence logic changed in Blazor apps"
+          href: aspnet-core/5.0/blazor-routing-logic-changed.md
         - name: "Blazor: Updated browser support"
           href: aspnet-core/5.0/blazor-browser-support-updated.md
         - name: "Blazor: Insignificant whitespace trimmed by compiler"
@@ -192,6 +218,8 @@
           href: globalization/5.0/uax29-compliant-grapheme-enumeration.md
         - name: Unicode category changed for Latin-1 characters
           href: globalization/5.0/unicode-categories-for-latin1-chars.md
+        - name: ListSeparator values changed
+          href: globalization/5.0/listseparator-value-change.md
       - name: Interop
         items:
         - name: Support for WinRT is removed
@@ -246,6 +274,8 @@
           href: serialization/5.0/options-honored-when-serializing-key-value-pairs.md
       - name: Windows Forms
         items:
+        - name: Native code can't access Windows Forms objects
+          href: windows-forms/5.0/winforms-objects-not-accessible-from-native-code.md
         - name: OutputType set to WinExe
           href: windows-forms/5.0/automatically-infer-winexe-output-type.md
         - name: DataGridView doesn't reset custom fonts
@@ -280,6 +310,16 @@
     items:
     - name: ASP.NET Core
       items:
+      - name: .NET 6.0
+        items:
+        - name: "Blazor: Parameter name changed in RequestImageFileAsync method"
+          href: aspnet-core/6.0/blazor-parameter-name-changed-in-method.md
+        - name: "Kestrel: Log message attributes changed"
+          href: aspnet-core/6.0/kestrel-log-message-attributes-changed.md
+        - name: "Middleware: HTTPS Redirection Middleware throws exception on ambiguous HTTPS ports"
+          href: aspnet-core/6.0/middleware-ambiguous-https-ports-exception.md
+        - name: "Razor: RazorEngine APIs marked obsolete"
+          href: aspnet-core/6.0/razor-engine-apis-obsolete.md
       - name: .NET 5.0
         items:
         - name: ASP.NET Core apps deserialize quoted numbers
@@ -292,6 +332,8 @@
           href: aspnet-core/5.0/authorization-resource-in-endpoint-routing.md
         - name: Microsoft-prefixed Azure integration packages removed
           href: aspnet-core/5.0/azure-integration-packages-removed.md
+        - name: "Blazor: Route precedence logic changed in Blazor apps"
+          href: aspnet-core/5.0/blazor-routing-logic-changed.md
         - name: "Blazor: Updated browser support"
           href: aspnet-core/5.0/blazor-browser-support-updated.md
         - name: "Blazor: Insignificant whitespace trimmed by compiler"
@@ -468,6 +510,8 @@
           href: globalization/5.0/uax29-compliant-grapheme-enumeration.md
         - name: Unicode category changed for Latin-1 characters
           href: globalization/5.0/unicode-categories-for-latin1-chars.md
+        - name: ListSeparator values changed
+          href: globalization/5.0/listseparator-value-change.md
       - name: .NET 3.0
         href: globalization.md
     - name: Interop
@@ -492,7 +536,6 @@
           href: msbuild/5.0/publishdepsfilepath-behavior-change.md
         - name: TargetFramework change from netcoreapp to net
           href: msbuild/5.0/targetframework-name-change.md
-      - name: (This file will eventually go away)
       - name: .NET 3.0
         href: msbuild.md
     - name: Networking
@@ -543,8 +586,20 @@
         href: visualbasic.md
     - name: Windows Forms
       items:
+      - name: .NET 6.0
+        items:
+        - name: APIs throw ArgumentNullException
+          href: windows-forms/6.0/apis-throw-argumentnullexception.md
+        - name: NotifyIcon.Text maximum text length increased
+          href: windows-forms/6.0/notifyicon-text-max-text-length-increased.md
+        - name: TableLayoutSettings properties throw InvalidEnumArgumentException
+          href: windows-forms/6.0/tablelayoutsettings-apis-throw-invalidenumargumentexception.md
+        - name: TreeNodeCollection.Item throws exception if node is assigned elsewhere
+          href: windows-forms/6.0/treenodecollection-item-throws-argumentexception.md
       - name: .NET 5.0
         items:
+        - name: Native code can't access Windows Forms objects
+          href: windows-forms/5.0/winforms-objects-not-accessible-from-native-code.md
         - name: OutputType set to WinExe
           href: windows-forms/5.0/automatically-infer-winexe-output-type.md
         - name: DataGridView doesn't reset custom fonts
@@ -579,26 +634,26 @@
       displayName: syslib, obsolete, obsoletion
       href: syslib-obsoletions.md
     - name: SYSLIB0001
-      href: syslib0001.md
+      href: syslib-warnings/syslib0001.md
     - name: SYSLIB0002
-      href: syslib0002.md
+      href: syslib-warnings/syslib0002.md
     - name: SYSLIB0003
-      href: syslib0003.md
+      href: syslib-warnings/syslib0003.md
     - name: SYSLIB0004
-      href: syslib0004.md
+      href: syslib-warnings/syslib0004.md
     - name: SYSLIB0005
-      href: syslib0005.md
+      href: syslib-warnings/syslib0005.md
     - name: SYSLIB0006
-      href: syslib0006.md
+      href: syslib-warnings/syslib0006.md
     - name: SYSLIB0007
-      href: syslib0007.md
+      href: syslib-warnings/syslib0007.md
     - name: SYSLIB0008
-      href: syslib0008.md
+      href: syslib-warnings/syslib0008.md
     - name: SYSLIB0009
-      href: syslib0009.md
+      href: syslib-warnings/syslib0009.md
     - name: SYSLIB0010
-      href: syslib0010.md
+      href: syslib-warnings/syslib0010.md
     - name: SYSLIB0011
-      href: syslib0011.md
+      href: syslib-warnings/syslib0011.md
     - name: SYSLIB0012
-      href: syslib0012.md
+      href: syslib-warnings/syslib0012.md

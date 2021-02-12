@@ -74,7 +74,11 @@ Whether or not you choose to start from the first chapter, you can reference any
 - [Sample migration](example-migration-eshop.md)
 - [Deployment scenarios](deployment-scenarios.md)
 
+<<<<<<< HEAD
 This guide is available both in PDF (TODO: add link) form and online. Feel free to forward this document or links to its online version to your team to ensure a common understanding of these concepts.
+=======
+This guide is available both in [PDF form](https://aka.ms/aspnet-porting-ebook) and online. Feel free to forward this document or links to its online version to your team to ensure a common understanding of these concepts.
+>>>>>>> master
 
 ## Send your feedback
 

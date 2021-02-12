@@ -1,7 +1,7 @@
 ---
 title: How to allow some kinds of invalid JSON with System.Text.Json
 description: "Learn how to allow comments, trailing commas, and quoted numbers while serializing to and deserializing from JSON in .NET."
-ms.date: 11/30/2020
+ms.date: 12/03/2020
 no-loc: [System.Text.Json, Newtonsoft.Json]
 zone_pivot_groups: dotnet-version
 helpviewer_keywords:
@@ -29,6 +29,8 @@ Here's example JSON with comments and a trailing comma:
   "Date": "2019-08-01T00:00:00-07:00",
   "TemperatureCelsius": 25, // Fahrenheit 77
   "Summary": "Hot", /* Zharko */
+  // Comments on
+  /* separate lines */
 }
 ```
 
@@ -70,12 +72,19 @@ To allow or write quoted numbers for specific properties, fields, or types, use 
 ## See also
 
 * [System.Text.Json overview](system-text-json-overview.md)
-* [Instantiate JsonSerializerOptions](system-text-json-configure-options.md)
+* [How to serialize and deserialize JSON](system-text-json-how-to.md)
+* [Instantiate JsonSerializerOptions instances](system-text-json-configure-options.md)
 * [Enable case-insensitive matching](system-text-json-character-casing.md)
 * [Customize property names and values](system-text-json-customize-properties.md)
 * [Ignore properties](system-text-json-ignore-properties.md)
 * [Handle overflow JSON](system-text-json-handle-overflow.md)
-* [Preserve circular references](system-text-json-preserve-references.md)
+* [Preserve references](system-text-json-preserve-references.md)
 * [Immutable types and non-public accessors](system-text-json-immutability.md)
 * [Polymorphic serialization](system-text-json-polymorphism.md)
+* [Migrate from Newtonsoft.Json to System.Text.Json](system-text-json-migrate-from-newtonsoft-how-to.md)
+* [Customize character encoding](system-text-json-character-encoding.md)
+* [Write custom serializers and deserializers](write-custom-serializer-deserializer.md)
+* [Write custom converters for JSON serialization](system-text-json-converters-how-to.md)
+* [DateTime and DateTimeOffset support](../datetime/system-text-json-support.md)
 * [System.Text.Json API reference](xref:System.Text.Json)
+* [System.Text.Json.Serialization API reference](xref:System.Text.Json.Serialization)

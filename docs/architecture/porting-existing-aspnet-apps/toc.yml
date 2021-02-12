@@ -62,8 +62,11 @@
           href: strategies-migrating-in-production.md
     - name: Example migration of eShop project
       href: example-migration-eshop.md
+<<<<<<< HEAD
     - name: More migration scenarios
       href: more-migration-scenarios.md
+=======
+>>>>>>> master
     - name: Deployment scenarios
       href: deployment-scenarios.md
     - name: Summary
