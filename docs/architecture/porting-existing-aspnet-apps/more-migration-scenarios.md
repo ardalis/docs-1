@@ -112,10 +112,61 @@ public IActionResult Index()
 
 This will default to returning the data in JSON format. XML and other formats will be used [if the app has been configured with the appropriate formatter](https://docs.microsoft.com/aspnet/core/web-api/advanced/formatting).
 
+## Dependent libraries with .NET Framework dependencies
+
+Many .NET Framework web apps depend on class libraries that make use of older .NET Framework classes. In some cases, these .NET Framework classes may not have an equivalent in .NET Core, or may be deprecated. This is a relatively common situation which can usually be addressed in an incremental fashion.
+
+As an example, consider this class which exists in a .NET 4.6.1 class library as part of a legacy application:
+
+```csharp
+public class Serializing
+{
+    public Stream SerializeBinary(object input)
+    {
+        var stream = new MemoryStream();
+        var binaryFormatter = new BinaryFormatter();
+        binaryFormatter.Serialize(stream, input);
+        stream.Seek(0, SeekOrigin.Begin);
+        return stream;
+    }
+
+    public object DeserializeBinary(Stream stream)
+    {
+        var binaryFormatter = new BinaryFormatter();
+        stream.Seek(0, SeekOrigin.Begin);
+        return binaryFormatter.Deserialize(stream);
+    }
+}
+```
+
+This class references the BinaryFormatter class, which has been [marked obsolete for security reasons](https://docs.microsoft.com/dotnet/core/compatibility/core-libraries/5.0/binaryformatter-serialization-obsolete). In ASP.NET Core 5.0 and later, references to the `BinaryFormatter.Serialize` and `BinaryFormatter.Deserialize` methods will begin to throw a `NotSupportedException`. What steps can be taken to port an ASP.NET MVC or WebApi app to ASP.NET Core when it makes use of a shared library referencing these types and methods?
+
+### Initial port to ASP.NET Core
+
+The simplest initial step to support moving the app to ASP.NET Core is to migrate to an older version of ASP.NET Core such as 2.1 or 2.2 and target .NET Framework. The [referenced sample](https://github.com/dotnet-architecture/eShopModernizing) demonstrates a project, `eShopPorted`, which uses this strategy. Using this approach, the new ASP.NET Core app can continue to reference the original .NET Class library, losing no functionality.
+
+### Next steps
+
+After the original app has been ported to ASP.NET Core, the next step is to migrate functionality from .NET Framework libraries to .NET Standard libraries. In most cases, functionality will continue to work between .NET Framework and .NET Standard. In those situations where the .NET Framework library has not .NET Standard equivalent (or it has been marked obsolete as with `BinaryFormater`), a choice must be made. The available options typically include:
+
+- Find and use a third party alternative package
+- Author the needed functionality
+- Use a different approach
+- Maintain a legacy service to perform the needed task
+
+In many cases, open source and/or commercial libraries exist that can fill any gaps between .NET Framework and .NET Standard support. This should typically be the first option considered, as the resolution may be as simple as adding a new NuGet package and perhaps authoring an [adapter](https://deviq.com/design-patterns/adapter-design-pattern) to connect its API to your app's usage of it.
+
+In rare cases, it may make sense to author the needed functionality yourself, placing it in a new custom library your team maintains. This should usually be a last resort unless the functionality is very simple and/or well-understood by the team. Unless the functionality is central to the application's design, it's usually better to leverage a well-established, tested, and ideally supported library than to attempt to reinvent such functionality yourself.
+
+In some cases, like with `BinaryFormatter`, the best approach may be to consider a different approach. The use of `BinaryFormatter` in web environments is strongly discouraged for security reasons, but alternatives formats like JSON and XML are quite well-supported. As the ported app is upgraded from ASP.NET Core 2.x to ASP.NET Core 3.1 or 5, it can modify its approach to use a JSON formatter from the `System.Text.Json` namespace, for example.
+
+Finally, if there are some legacy services your app requires that you can't approach differently and which no longer exist in ASP.NET Core 3.1 and later, your last option is to expose the functionality as an internal service. Your new, ported application can reference the needed functionality by calling the .NET Framework service over HTTP and getting back the result. This approach adds some maintenance, hosting, and performance overhead, but can be effectively used to continue supporting the existing functionality while moving the bulk of the app to ASP.NET Core.
+
 ## References
 
 - [ASP.NET Web API Content Negotiation](https://docs.microsoft.com/aspnet/web-api/overview/formats-and-model-binding/content-negotiation)
 - [Format response data in ASP.NET Core Web API](https://docs.microsoft.com/aspnet/core/web-api/advanced/formatting)
+- [BinaryFormatter serialization methods are obsolete and prohibited in ASP.NET apps](https://docs.microsoft.com/dotnet/core/compatibility/core-libraries/5.0/binaryformatter-serialization-obsolete)
 
 >[!div class="step-by-step"]
 >[Previous](strategies-migrating-in-production.md)
